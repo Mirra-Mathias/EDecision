@@ -4,6 +4,8 @@ services:
   mariadb:
     image: mariadb:10.9.3
     restart: always
+    ports:
+      - "3306:3306"
     volumes:
       - ./data/mariadb:/var/lib/mysql
     environment:
