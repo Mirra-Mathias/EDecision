@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  mariadb:
+    image: mariadb:10.9.3
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mariadb:/var/lib/mysql
+    environment:
+        MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${DB_DATABASE}
+        MYSQL_USER: ${DB_USER}
+        MYSQL_PASSWORD: ${DB_PASSWORD}
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin
+    ports:
+      - "80:80"
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mariadb
+      - UPLOAD_LIMIT=300M
+    depends_on:
+      - mariadb
