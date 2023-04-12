@@ -44,44 +44,59 @@ services:
   authentification-api:
     build:
       context: ./authentification
-      dockerfile: Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     depends_on:
       - authentification-db
     ports:
       - "8081:8080"
+    volumes:
+      - ./authentification:/app
+      - ~/.m2:/root/.m2
 
   projets-api:
     build:
       context: ./projets
-      dockerfile: Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     depends_on:
       - projets-db
     ports:
       - "8082:8080"
+    volumes:
+      - ./projets:/app
+      - ~/.m2:/root/.m2
 
   equipes-api:
     build:
       context: ./equipes
-      dockerfile: Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     depends_on:
       - equipes-db
     ports:
       - "8083:8080"
+    volumes:
+      - ./equipes:/app
+      - ~/.m2:/root/.m2
 
   propositions-api:
     build:
       context: ./propositions
-      dockerfile: Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     depends_on:
       - propositions-db
     ports:
       - "8084:8080"
+    volumes:
+      - ./propositions:/app
+      - ~/.m2:/root/.m2
 
   votes-api:
     build:
       context: ./votes
-      dockerfile: Dockerfile.prod
+      dockerfile: ./Dockerfile.dev
     depends_on:
       - votes-db
     ports:
       - "8085:8080"
+    volumes:
+      - ./votes:/app
+      - ~/.m2:/root/.m2
